@@ -30,4 +30,5 @@ class QueueFrontier(StackFrontier):
             raise Exception("Empty frontier")
         return self.frontier.popleft()
 
-    
+
+class Maze()
