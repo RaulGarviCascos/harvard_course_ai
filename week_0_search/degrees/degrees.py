@@ -17,6 +17,9 @@ def load_data(directory):
     """
     Load data from CSV files into memory.
     """
+    directoryPath = sys.path[0]
+    directory = directoryPath+"/"+directory
+
     # Load people
     with open(f"{directory}/people.csv", encoding="utf-8") as f:
         reader = csv.DictReader(f)
@@ -53,7 +56,7 @@ def load_data(directory):
 
 
 def main():
-    from pprint import pprint
+   
     if len(sys.argv) > 2:
         sys.exit("Usage: python degrees.py [directory]")
     directory = sys.argv[1] if len(sys.argv) == 2 else "large"
@@ -62,13 +65,13 @@ def main():
     print("Loading data...")
     load_data(directory)
     print("Data loaded.")
-    pprint(names)
-    pprint(people)
-    pprint(movies)
+   
     source = person_id_for_name(input("Name: "))
+   
     if source is None:
         sys.exit("Person not found.")
     target = person_id_for_name(input("Name: "))
+   
     if target is None:
         sys.exit("Person not found.")
 
@@ -87,7 +90,6 @@ def main():
             movie = movies[path[i + 1][0]]["title"]
             print(f"{i + 1}: {person1} and {person2} starred in {movie}")
 
-
 def shortest_path(source, target):
     """
     Returns the shortest list of (movie_id, person_id) pairs
@@ -97,7 +99,36 @@ def shortest_path(source, target):
     """
 
     # TODO
-    raise NotImplementedError
+
+
+    start = Node(state= source, parent=None, action=None)
+    frontier = QueueFrontier()
+    frontier.add(start)
+
+    exploredSet = set()
+
+    while True:
+        if frontier.empty():
+            return None
+            
+
+        node = frontier.remove()
+
+        if node.state == target:
+            actions = []
+            while node.parent is not None:
+                actions.append((node.action,node.state))
+                node = node.parent
+            actions.reverse()
+           
+            return actions
+        
+        exploredSet.add(node.state)
+
+        for action, state in neighbors_for_person(node.state):
+            if  not frontier.contains_state(state) and state not in exploredSet:    
+                frontier.add(Node(state,node,action))
+
 
 
 def person_id_for_name(name):
