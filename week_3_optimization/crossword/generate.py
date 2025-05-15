@@ -91,14 +91,9 @@ class CrosswordCreator():
         """
         self.enforce_node_consistency()
      
-        from pprint import pprint
-
-        pprint(self.crossword.variables)
-      
-        print('-------')
         self.ac3()
-        pprint(self.domains)
-        print('-------')
+       
+       
         return self.backtrack(dict())
 
     def enforce_node_consistency(self):
@@ -192,8 +187,8 @@ class CrosswordCreator():
             #binary constraint
             var_neighbors = self.crossword.neighbors(var)
             for neighbor in var_neighbors:
-                for n_word in self.domains[neighbor]:
-                    if not self.have_same_letter(var,neighbor,assignment[var],n_word):
+                if neighbor in assignment:
+                    if not self.have_same_letter(var,neighbor,assignment[var],assignment[neighbor]):
                         return False
         return True
                    
