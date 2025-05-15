@@ -1,0 +1,6 @@
+Collecting pomegranate==0.14.8
+  Using cached pomegranate-0.14.8.tar.gz (4.3 MB)
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'error'
