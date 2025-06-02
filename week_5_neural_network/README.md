@@ -1,0 +1,3 @@
+I tried different models. The first model I tested was the same one used in handwriting.py. It performed poorly, finishing with an accuracy of just 0.05. Then, I added more hidden layers, 10 in total, which worked better than expected, achieving an accuracy of 0.87. After that, I experimented with combining hidden layers using different activation functions: ReLU, sigmoid, tanh, and ELU, but this approach resulted in the lowest accuracy.
+
+Finally, the best-performing model had 2 hidden layers with 256 and 128 neurons respectively, each followed by a dropout rate of 0.3 to help prevent overfitting. Another important improvement was the addition of an extra convolutional layer with the corresponding pooling layer. This final version had an accuracy of 0.9873.
