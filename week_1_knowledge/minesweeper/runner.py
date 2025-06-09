@@ -216,9 +216,6 @@ while True:
     if move:
         if game.is_mine(move):
             lost = True
-
-            print("minas guardadas:",ai.mines)
-            print("moves hechos", ai.moves_made)
         else:
             nearby = game.nearby_mines(move)
             revealed.add(move)
