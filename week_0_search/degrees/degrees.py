@@ -75,7 +75,6 @@ def main():
     if target is None:
         sys.exit("Person not found.")
 
-    
     path = shortest_path(source, target)
 
     if path is None:
@@ -90,6 +89,7 @@ def main():
             movie = movies[path[i + 1][0]]["title"]
             print(f"{i + 1}: {person1} and {person2} starred in {movie}")
 
+
 def shortest_path(source, target):
     """
     Returns the shortest list of (movie_id, person_id) pairs
@@ -97,11 +97,7 @@ def shortest_path(source, target):
 
     If no possible path, returns None.
     """
-
-    # TODO
-
-
-    start = Node(state= source, parent=None, action=None)
+    start = Node(state=source, parent=None, action=None)
     frontier = QueueFrontier()
     frontier.add(start)
 
@@ -110,14 +106,13 @@ def shortest_path(source, target):
     while True:
         if frontier.empty():
             return None
-            
 
         node = frontier.remove()
 
         if node.state == target:
             actions = []
             while node.parent is not None:
-                actions.append((node.action,node.state))
+                actions.append((node.action, node.state))
                 node = node.parent
             actions.reverse()
            
@@ -126,9 +121,8 @@ def shortest_path(source, target):
         exploredSet.add(node.state)
 
         for action, state in neighbors_for_person(node.state):
-            if  not frontier.contains_state(state) and state not in exploredSet:    
-                frontier.add(Node(state,node,action))
-
+            if not frontier.contains_state(state) and state not in exploredSet:    
+                frontier.add(Node(state, node, action))
 
 
 def person_id_for_name(name):

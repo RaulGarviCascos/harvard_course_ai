@@ -23,13 +23,12 @@ knowledge0 = And(
 # A says "We are both knaves."
 # B says nothing.
 knowledge1 = And(
-    # TODO
     Or(AKnight, AKnave),
     Not(And(AKnight, AKnave)),
+    Or(BKnight, BKnave),
+    Not(And(BKnight, BKnave)),  
 
-    
-    Biconditional(AKnave, Not(And(AKnave, BKnave)))
-    
+    Biconditional(AKnight, And(AKnave, BKnave))  
 )
 
 
@@ -37,14 +36,13 @@ knowledge1 = And(
 # A says "We are the same kind."
 # B says "We are of different kinds."
 knowledge2 = And(
-    # TODO
     Or(AKnight, AKnave),
     Not(And(AKnight, AKnave)),
     Or(BKnave, BKnight),
     Not(And(BKnight, BKnave)),
 
-    Biconditional(AKnight, Or(And(AKnave, BKnave),And(AKnight, BKnight))),
-    Biconditional(BKnight, Or(And(AKnave, BKnight),And(AKnight, BKnave)))
+    Biconditional(AKnight, Or(And(AKnave, BKnave), And(AKnight, BKnight))),
+    Biconditional(BKnight, Or(And(AKnave, BKnight), And(AKnight, BKnave)))
 
 
 )
@@ -55,7 +53,6 @@ knowledge2 = And(
 # B says "C is a knave."
 # C says "A is a knight."
 knowledge3 = And(
-    # TODO
     Or(AKnight, AKnave),
     Not(And(AKnight, AKnave)),
     Or(BKnave, BKnight),
@@ -63,9 +60,9 @@ knowledge3 = And(
     Or(CKnight, CKnave),
     Not(And(CKnight, CKnave)),
 
-    Biconditional(AKnight,Or(AKnight,AKnave)),
-    Biconditional(BKnight,And(Biconditional(AKnight,AKnave),CKnave)),
-    Biconditional(CKnight,AKnight)
+    Biconditional(AKnight, Or(AKnight, AKnave)),
+    Biconditional(BKnight, And(Biconditional(AKnight, AKnave), CKnave)),
+    Biconditional(CKnight, AKnight)
     
 )
 
